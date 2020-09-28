@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Chapter3 {
 	class Program {
 		static void Main(string[] args) {
-			var number = new List<int> { 12, 87, 94, 14, 53, 20, 40, 35, 76, 91, 31, 17, 48 };
+			var number = new List<int> { 
+				12, 87, 94, 14, 53, 20, 40, 35, 76, 91, 31, 17, 48 };
 
 			#region 3.1.1
 			var exist = number.Exists(n => n % 8 == 0 || n % 9 == 0);
@@ -59,7 +60,6 @@ namespace Chapter3 {
 				Console.WriteLine($"文字数の長さ：{length}");
 			}
 			#endregion
-
 
 		}
 	}
