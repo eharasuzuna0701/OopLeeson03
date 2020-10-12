@@ -34,7 +34,7 @@ namespace Chapter6 {
 			#endregion
 			#region 6.2
 			var books = new List<Book> {
-			new Book { Title = "C#プログラミングの新常識", Price = 3800, Pages = 378 },
+			new Book { Title = "C#プログラミングの新常識「C#」", Price = 3800, Pages = 378 },
 			new Book { Title = "ラムダ式とLINQの極意", Price = 2500, Pages = 312 },
 			new Book { Title = "ワンダフル・C#ライフ", Price = 2900, Pages = 385 },
 			new Book { Title = "一人で学ぶ並列処理プログラミング", Price = 4800, Pages = 464 },
@@ -43,6 +43,15 @@ namespace Chapter6 {
 			new Book { Title = "楽しいC#プログラミング教室", Price = 2540, Pages = 348 },
 			};
 
+			int count = 0;
+
+			foreach (var booc in books.Where(b => b.Title.Contains("C#"))) {
+				for (int i = 0; i < booc.Title.Length-1; i++) {
+					if ((booc.Title[i] == 'C')&& (booc.Title[i +1]=='#')) {
+						count++;
+					}
+				}
+			}
 			books.Where(x => x.Title == "ワンダフル・C#ライフ").ToList().
 				ForEach(x => Console.WriteLine($"本のタイトル：{x.Title}　価格：{x.Price}　ページ数：{x.Pages}"));
 			Console.WriteLine();
@@ -67,6 +76,8 @@ namespace Chapter6 {
 			foreach (var item in select) {
 				Console.WriteLine(item.Title);
 			}
+			var Cc = books.Count(c => c.Title.Contains("C#"));
+			Console.WriteLine(Cc);
 			#endregion
 		}
 	}
