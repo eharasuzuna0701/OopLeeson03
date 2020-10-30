@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="800">
     <Grid>
+        <Grid>
+            <Label  Content="件名:"  Margin="10,10,682,609"
+                    FontSize="35" RenderTransformOrigin="0.5,0.5"/>
+            <TextBox  FontSize="35" Margin="115,21,10,609"/>
+            </Grid>
+        <Grid>
+            <Label Content="To:" Margin="10,65,682,554"
+                   FontSize="35"/>
+            <TextBox  FontSize="35" Margin="115,186,10,444"/>
+        </Grid>
+        <Grid>
+            <Label Content="Cc:" Margin="10,120,682,499"
+                 FontSize="35"/>
+            <TextBox  FontSize="35" Margin="115,131,10,499"/>
+        </Grid>
+        <Grid>
+            <Label Content="Bcc:" Margin="10,175,682,444"
+                    FontSize="35"/>
+            <TextBox  FontSize="35" Margin="115,76,10,554"/>
+        </Grid>
+        <Grid>
+        <Label Content="本文:" Margin="10,230,682,139"
+                 FontSize="35"/>
         
+        <TextBox  FontSize="35" Margin="115,242,10,50"/>
+    </Grid>
     </Grid>
 </Window>
