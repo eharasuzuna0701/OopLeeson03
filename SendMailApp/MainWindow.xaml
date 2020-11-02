@@ -7,31 +7,46 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="800">
     <Grid>
-        <Grid>
-            <Label  Content="件名:"  Margin="10,10,682,609"
-                    FontSize="35" RenderTransformOrigin="0.5,0.5"/>
-            <TextBox  FontSize="35" Margin="115,21,10,609"/>
-            </Grid>
-        <Grid>
-            <Label Content="To:" Margin="10,65,682,554"
-                   FontSize="35"/>
-            <TextBox  FontSize="35" Margin="115,186,10,444"/>
-        </Grid>
-        <Grid>
-            <Label Content="Cc:" Margin="10,120,682,499"
-                 FontSize="35"/>
-            <TextBox  FontSize="35" Margin="115,131,10,499"/>
-        </Grid>
-        <Grid>
-            <Label Content="Bcc:" Margin="10,175,682,444"
-                    FontSize="35"/>
-            <TextBox  FontSize="35" Margin="115,76,10,554"/>
-        </Grid>
-        <Grid>
-        <Label Content="本文:" Margin="10,230,682,139"
-                 FontSize="35"/>
-        
-        <TextBox  FontSize="35" Margin="115,242,10,50"/>
-    </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="58*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="64*"/>
+            <RowDefinition Height="352*"/>
+            <RowDefinition Height="75*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="31*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label  Content="件名:"  Margin="10,7,8,5"
+                    FontSize="35" RenderTransformOrigin="0.5,0.188"/>
+        <TextBox  FontSize="35" Margin="2,13,10,10" Grid.Column="1"/>
+
+
+        <Label Content="To:" Margin="10,5,8,4"
+                   FontSize="35" Grid.Row="1"/>
+        <TextBox  FontSize="35" Margin="2,10,10,10" Grid.Column="1" Grid.Row="3"/>
+
+        <Label Content="Cc:" Margin="10,7,8,3"
+                 FontSize="35" Grid.Row="2"/>
+        <TextBox  FontSize="35" Margin="2,10,10,10" Grid.Column="1" Grid.Row="2"/>
+
+        <Label Content="Bcc:" Margin="10,5,8,10"
+                    FontSize="35" Grid.Row="3"/>
+        <TextBox  FontSize="35" Margin="2,10,10,10" Grid.Column="1" Grid.Row="1"/>
+
+        <Label Content="本文:" Margin="8,10,10,70"
+                 FontSize="35" Grid.Row="4"/>
+
+        <TextBox  FontSize="35" Margin="2,10,10,10" Grid.Column="1" Grid.Row="4"/>
+        <Button Content="送信" Grid.Column="1" HorizontalAlignment="Left" 
+                Margin="525,10,0,0" Grid.Row="5" VerticalAlignment="Top" 
+                Width="147" Height="55" Click="Button_Click_1" />
+        <Button Content="キャンセル" Grid.Column="1" HorizontalAlignment="Left" 
+            Margin="373,10,0,0" Grid.Row="5" VerticalAlignment="Top" 
+            Width="147" Height="55" Click="Button_Click" />
+
     </Grid>
 </Window>
