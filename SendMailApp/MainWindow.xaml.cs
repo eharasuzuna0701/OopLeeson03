@@ -36,13 +36,20 @@ namespace SendMailApp {
 		}
 		private void BtOK_Click(object sender, RoutedEventArgs e) {
 			try {
-				MailMessage msg = new MailMessage("ojsibfosys01@gmail.com",tbTo.Text);
+				MailMessage msg = new MailMessage();
+
 				string[] txtMailAddress = tbTo.Text.Split(',');
 				foreach (string s in txtMailAddress) {
-					// 区切り文字ごとにアドレスを取り出し、MailAddressCollectionに追加します。
 					msg.To.Add(new MailAddress(s));
 				}
-			
+
+				msg.From = new MailAddress("ojsibfosys01@gmail.com");
+
+				if (tbCc.Text != "")
+					msg.CC.Add(tbCc.Text);
+				if (tbBcc.Text != "")
+				msg.Bcc.Add(tbBcc.Text);
+				
 				msg.Subject = Subject.Text;
 				msg.Body = Body.Text;
 
