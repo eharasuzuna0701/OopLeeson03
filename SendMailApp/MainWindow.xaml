@@ -48,5 +48,6 @@
             Margin="373,10,0,0" Grid.Row="5" VerticalAlignment="Top" 
             Width="147" Height="55" Click="BtCansel_Click" />
 
+        <Button x:Name="btConfig" Grid.Row="5" Margin="10" Content="設定" Click="btConfig_Click"/>
     </Grid>
 </Window>
