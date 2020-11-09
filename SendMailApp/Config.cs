@@ -26,7 +26,7 @@ namespace SendMailApp {
 
 		public void DefaultSet()
 		{
-			Smtp = "smtp.gmail.com";
+			Smtp = "ojsinfosys01@gmail.com";
 			MailAddress = "ojsinfosys01@gmail.com";
 			PassWord = "ojsInfosys2020";
 			Port = 587;
@@ -43,7 +43,7 @@ namespace SendMailApp {
 			};
 			return obj;
 		}
-		public bool Updatestatus(Config cf) {
+		public bool Updatestatus( string smtp, string mailAddress,string passWord,int port,bool ssl) {
 			this.Smtp = "smtp.gmail.com";
 			this.MailAddress = "ojsinfosys01@gmail.com";
 			this.PassWord = "ojsInfosys2020";

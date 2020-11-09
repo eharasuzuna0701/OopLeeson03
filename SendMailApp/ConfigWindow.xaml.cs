@@ -26,13 +26,36 @@ namespace SendMailApp {
 			tbSmtp.Text = cf.Smtp;
 			tbPort.Text = cf.Port.ToString();
 			tbAddress.Text = tbName.Text = cf.MailAddress;
-			tbPass.Text = cf.PassWord;
+			tbPass.Password = cf.PassWord;
 			cbssl.IsChecked = cf.Ssl;
 		}
 
-		//private void btApply_Click(object sender, RoutedEventArgs e) {
-		//(Config.GetInstance()).Updatestatus(
-		//	tbSmtp.Text, tbName.Text, tbPass.Text,int.Parse(tbPort.Text),cbssl
-		//}
+		private void btApply_Click(object sender, RoutedEventArgs e) {
+			(Config.GetInstance()).Updatestatus(
+				tbSmtp.Text,
+				tbName.Text,
+				tbPass.Password,
+				int.Parse(tbPort.Text),
+				cbssl.IsChecked ?? false );
+		}
+
+		private void btCansel_Click(object sender, RoutedEventArgs e) {
+			
+			this.Close();
+		}
+
+		private void btOK_Click(object sender, RoutedEventArgs e) {
+			btApply_Click(sender, e);
+			this.Close();
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e) {
+			tbSmtp.Text = (Config.GetInstance()).Smtp;
+			tbPort.Text = (Config.GetInstance()).Port.ToString();
+			tbName.Text = (Config.GetInstance()).MailAddress;
+			tbPass.Password = (Config.GetInstance()).PassWord;
+			cbssl.IsChecked = (Config.GetInstance()).Ssl;
+			tbAddress.Text = (Config.GetInstance()).MailAddress;
+		}
 	}
 }

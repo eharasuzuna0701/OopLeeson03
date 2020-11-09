@@ -75,6 +75,7 @@ namespace SendMailApp {
 		}
 		private void window_Lodedd() {
 			
+
 		}
 	}
 }
