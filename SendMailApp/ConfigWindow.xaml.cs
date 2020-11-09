@@ -57,5 +57,7 @@ namespace SendMailApp {
 			cbssl.IsChecked = (Config.GetInstance()).Ssl;
 			tbAddress.Text = (Config.GetInstance()).MailAddress;
 		}
+
+	
 	}
 }

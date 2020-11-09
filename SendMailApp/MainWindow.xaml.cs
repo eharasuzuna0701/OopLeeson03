@@ -36,15 +36,9 @@ namespace SendMailApp {
 		}
 		private void BtOK_Click(object sender, RoutedEventArgs e) {
 			try {
-				MailMessage msg = new MailMessage();
-
-				string[] txtMailAddress = tbTo.Text.Split(',');
-				foreach (string s in txtMailAddress) {
-					msg.To.Add(new MailAddress(s));
-				}
-
-				msg.From = new MailAddress("ojsibfosys01@gmail.com");
-
+				Config ctf = Config.GetInstance();
+				MailMessage msg = new MailMessage(ctf.MailAddress,tbTo.Text);
+			
 				if (tbCc.Text != "")
 					msg.CC.Add(tbCc.Text);
 				if (tbBcc.Text != "")
@@ -53,13 +47,13 @@ namespace SendMailApp {
 				msg.Subject = Subject.Text;
 				msg.Body = Body.Text;
 
-				SmtpClient sc = new SmtpClient();
-				sc.Host = "smtp.gmail.com";
-				sc.Port = 587;
-				sc.EnableSsl = true;
-				sc.Credentials = new NetworkCredential("ojsinfosys01@gmail.com", "ojsInfosys2020");
+				
+				sc.Host = ctf.Smtp;
+				sc.Port = ctf.Port;
+				sc.EnableSsl = ctf.Ssl;
+				sc.Credentials = new NetworkCredential(ctf.MailAddress,ctf.PassWord);
 				sc.SendMailAsync(msg);
-
+				
 			} catch (Exception ex) {
 				MessageBox.Show(ex.Message);
 			}
@@ -73,9 +67,15 @@ namespace SendMailApp {
 			configWindow.ShowDialog();
 
 		}
-		private void window_Lodedd() {
-			
+		private void window_Lodedd(object sender, RoutedEventArgs e) {
+
+			Config.GetInstance().DeSelealise();
 
 		}
+
+		private void Window_Closed(object sender, RoutedEventArgs e) {
+			Config.GetInstance().Selealise();
+		}
+
 	}
 }

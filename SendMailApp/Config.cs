@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SendMailApp {
 	public class Config {
@@ -51,6 +53,31 @@ namespace SendMailApp {
 			this.Ssl = true;
 			return true;
 		}
-		
+		public void Selealise() {
+			var Config = new Config {
+				Smtp = Smtp,
+				MailAddress = MailAddress,
+				PassWord = PassWord,
+				Port = Port,
+				Ssl = Ssl,
+			};
+			using (var writer = XmlWriter.Create("config.xml")) {
+				var seirializer = new XmlSerializer(typeof(Config));
+				seirializer.Serialize(writer, Config);
+				}
+			}
+
+		public void DeSelealise() {
+			using (var reader = XmlReader.Create("config.xml")) {
+				var seirializer = new XmlSerializer(typeof(Config));
+				var config = seirializer.Deserialize(reader) as Config;
+				Console.WriteLine(config);
+				this.Smtp = config.Smtp;
+				this.MailAddress = config.MailAddress;
+				this.PassWord = config.PassWord;
+				this.Port = config.Port;
+				this.Ssl = config.Ssl;
+			}
+		}
 	}
 }
