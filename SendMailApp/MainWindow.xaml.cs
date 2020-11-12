@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -37,44 +38,63 @@ namespace SendMailApp {
 		private void BtOK_Click(object sender, RoutedEventArgs e) {
 			try {
 				Config ctf = Config.GetInstance();
-				MailMessage msg = new MailMessage(ctf.MailAddress,tbTo.Text);
-			
+				MailMessage msg = new MailMessage(ctf.MailAddress, tbTo.Text);
+
 				if (tbCc.Text != "")
 					msg.CC.Add(tbCc.Text);
 				if (tbBcc.Text != "")
-				msg.Bcc.Add(tbBcc.Text);
-				
+					msg.Bcc.Add(tbBcc.Text);
+
 				msg.Subject = Subject.Text;
 				msg.Body = Body.Text;
 
-				
+
 				sc.Host = ctf.Smtp;
 				sc.Port = ctf.Port;
 				sc.EnableSsl = ctf.Ssl;
-				sc.Credentials = new NetworkCredential(ctf.MailAddress,ctf.PassWord);
+				sc.Credentials = new NetworkCredential(ctf.MailAddress, ctf.PassWord);
 				sc.SendMailAsync(msg);
-				
+
 			} catch (Exception ex) {
 				MessageBox.Show(ex.Message);
 			}
 		}
 		private void BtCansel_Click(object sender, RoutedEventArgs e) {
-			//まったくわからん
 			sc.SendAsyncCancel();
 		}
-		private void btConfig_Click(object sender, RoutedEventArgs e) {
+
+		private void btConfig_Click(object sender, RoutedEventArgs e) 
+			{
+			ConfigWindowShow();
+
+		}
+		
+		//設定画面呼び出しメソッド
+		private static void ConfigWindowShow() {
 			ConfigWindow configWindow = new ConfigWindow();
 			configWindow.ShowDialog();
-
-		}
-		private void window_Lodedd(object sender, RoutedEventArgs e) {
-
-			Config.GetInstance().DeSelealise();
-
 		}
 
-		private void Window_Closed(object sender, RoutedEventArgs e) {
-			Config.GetInstance().Selealise();
+		private void Window_Lodedd(object sender, RoutedEventArgs e) {
+			try {
+				Config.GetInstance().DeSelealise();//逆シリアル化メソッド
+			}
+			//エラーメッセージ
+			catch (FileNotFoundException) {
+				//ファイルが存在しないので設定画面を表示
+				ConfigWindowShow();
+			} catch (Exception ex) {
+				MessageBox.Show(ex.Message);
+			}
+		}
+
+		private void Window_Closed(object sender, EventArgs e) {
+			try {
+				Config.GetInstance().Selealise();//シリアル化メソッド
+			} catch (Exception ex) {
+				MessageBox.Show(ex.Message);
+			}
+			
 		}
 
 	}

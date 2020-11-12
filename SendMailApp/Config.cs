@@ -26,8 +26,7 @@ namespace SendMailApp {
 
 		}
 
-		public void DefaultSet()
-		{
+		public void DefaultSet() {
 			Smtp = "ojsinfosys01@gmail.com";
 			MailAddress = "ojsinfosys01@gmail.com";
 			PassWord = "ojsInfosys2020";
@@ -45,7 +44,8 @@ namespace SendMailApp {
 			};
 			return obj;
 		}
-		public bool Updatestatus( string smtp, string mailAddress,string passWord,int port,bool ssl) {
+
+		public bool Updatestatus(string smtp, string mailAddress, string passWord, int port, bool ssl) {
 			this.Smtp = "smtp.gmail.com";
 			this.MailAddress = "ojsinfosys01@gmail.com";
 			this.PassWord = "ojsInfosys2020";
@@ -53,30 +53,20 @@ namespace SendMailApp {
 			this.Ssl = true;
 			return true;
 		}
+
+		//シリアル化
 		public void Selealise() {
-			var Config = new Config {
-				Smtp = Smtp,
-				MailAddress = MailAddress,
-				PassWord = PassWord,
-				Port = Port,
-				Ssl = Ssl,
-			};
 			using (var writer = XmlWriter.Create("config.xml")) {
 				var seirializer = new XmlSerializer(typeof(Config));
-				seirializer.Serialize(writer, Config);
-				}
-			}
+				seirializer.Serialize(writer, instance);
+			} 
+		}
 
+		//逆シリアル化
 		public void DeSelealise() {
 			using (var reader = XmlReader.Create("config.xml")) {
 				var seirializer = new XmlSerializer(typeof(Config));
-				var config = seirializer.Deserialize(reader) as Config;
-				Console.WriteLine(config);
-				this.Smtp = config.Smtp;
-				this.MailAddress = config.MailAddress;
-				this.PassWord = config.PassWord;
-				this.Port = config.Port;
-				this.Ssl = config.Ssl;
+				instance = seirializer.Deserialize(reader) as Config;
 			}
 		}
 	}
