@@ -20,8 +20,9 @@ namespace SendMailApp {
 		public ConfigWindow() {
 			InitializeComponent();
 		}
-
+		//初期設定ボタン
 		private void btDeflt_Click(object sender, RoutedEventArgs e) {
+
 			Config cf = (Config.GetInstance()).getDefaltStatus();
 			tbSmtp.Text = cf.Smtp;
 			tbPort.Text = cf.Port.ToString();
@@ -30,20 +31,36 @@ namespace SendMailApp {
 			cbssl.IsChecked = cf.Ssl;
 		}
 
+		//適用（更新）ボタン
 		private void btApply_Click(object sender, RoutedEventArgs e) {
-			(Config.GetInstance()).Updatestatus(
+			//空白の値を探す
+			if (!(tbAddress.Text == ""|| tbName.Text == "" || 
+				tbPass.Password == "" || tbPort.Text == "")) {
+				try {
+					ApplyMthoty();
+				} catch (Exception ex) {
+					MessageBox.Show(ex.Message);
+				}
+			//エラーメッセージ
+			} else {
+				MessageBox.Show("値が入力されていない項目があります。");
+			}
+
+		}
+		//更新メソッド
+		private void ApplyMthoty(){
+		(Config.GetInstance()).Updatestatus(
 				tbSmtp.Text,
 				tbName.Text,
 				tbPass.Password,
 				int.Parse(tbPort.Text),
-				cbssl.IsChecked ?? false );
-		}
-
-		private void btCansel_Click(object sender, RoutedEventArgs e) {
-			
+				cbssl.IsChecked ?? false);
+	}
+	//キャンセルボタン
+	private void btCansel_Click(object sender, RoutedEventArgs e){
 			this.Close();
 		}
-
+		//OKボタン
 		private void btOK_Click(object sender, RoutedEventArgs e) {
 			btApply_Click(sender, e);
 			this.Close();
