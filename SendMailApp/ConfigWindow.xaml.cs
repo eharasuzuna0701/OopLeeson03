@@ -57,8 +57,18 @@ namespace SendMailApp {
 				cbssl.IsChecked ?? false);
 	}
 	//キャンセルボタン
+	
 	private void btCansel_Click(object sender, RoutedEventArgs e){
-			this.Close();
+	//メッセージボックス
+			MessageBoxResult kakunin = MessageBox.Show(
+				"本当に戻りますか？", "確認", MessageBoxButton.YesNo,
+				MessageBoxImage.Question);
+			
+			if (kakunin == MessageBoxResult.Yes) {
+				//「はい」が選択された時
+				this.Close();
+			} 
+			
 		}
 		//OKボタン
 		private void btOK_Click(object sender, RoutedEventArgs e) {
