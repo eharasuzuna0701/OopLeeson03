@@ -26,6 +26,7 @@ namespace SendMailApp {
 
 		public MainWindow() {
 			InitializeComponent();
+
 			sc.SendCompleted += Sc_SendCompleted;
 
 		}
@@ -34,9 +35,10 @@ namespace SendMailApp {
 				MessageBox.Show("送信はキャンセルされました");
 			} else {
 				MessageBox.Show(e.Error?.Message ?? "送信完了");
-			}
+			}	
 		}
 		private void BtOK_Click(object sender, RoutedEventArgs e) {
+			
 			try {
 				Config ctf = Config.GetInstance();
 				MailMessage msg = new MailMessage(ctf.MailAddress, tbTo.Text);
@@ -46,8 +48,8 @@ namespace SendMailApp {
 				if (tbBcc.Text != "")
 					msg.Bcc.Add(tbBcc.Text);
 
-				msg.Subject = Subject.Text;
-				msg.Body = Body.Text;
+				msg.Subject = tbSubject.Text;
+				msg.Body = tbBody.Text;
 
 				//添付ファイル
 				foreach (var item in lbfile.Items) {
@@ -59,7 +61,23 @@ namespace SendMailApp {
 				sc.Port = ctf.Port;
 				sc.EnableSsl = ctf.Ssl;
 				sc.Credentials = new NetworkCredential(ctf.MailAddress, ctf.PassWord);
-				sc.SendMailAsync(msg);
+
+				if (msg.Subject == "" || msg.Body == "") {
+					MessageBoxResult nullmessageBox = MessageBox.Show(
+							"空白のままの項目があります。本当に送信しますか？", "確認", MessageBoxButton.YesNo,
+							MessageBoxImage.Question);
+
+					if (nullmessageBox == MessageBoxResult.Yes) {
+						//「はい」が選択された時
+						sc.SendMailAsync(msg);
+					}
+					if (nullmessageBox == MessageBoxResult.No) {
+						//「いいえ」が選択された時
+						Close();
+					}
+				} else {
+					sc.SendMailAsync(msg);
+				}
 
 			} catch (Exception ex) {
 				MessageBox.Show(ex.Message);
@@ -72,7 +90,6 @@ namespace SendMailApp {
 		private void btConfig_Click(object sender, RoutedEventArgs e) 
 			{
 			ConfigWindowShow();
-
 		}
 		
 		//設定画面呼び出しメソッド
@@ -102,6 +119,7 @@ namespace SendMailApp {
 			}
 			
 		}
+	
 		//添付ファイル追加
 		private void btAdd_Click(object sender, RoutedEventArgs e) {
 			var ofd = new OpenFileDialog();

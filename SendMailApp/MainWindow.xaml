@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
 
         <Label  Content="件名:"  Margin="5" FontSize="35" />
-        <TextBox x:Name="Subject" FontSize="35" Margin="5" Grid.Column="1" />
+        <TextBox x:Name="tbSubject" FontSize="35" Margin="5" Grid.Column="1" />
 
         <Label Content="To:" Margin="5" FontSize="35" Grid.Row="1" />
         <TextBox x:Name="tbBcc" FontSize="35" Margin="5" Grid.Column="1" Grid.Row="3" />
@@ -35,7 +35,7 @@
         <TextBox  x:Name="tbTo" FontSize="35" Margin="5" Grid.Column="1" Grid.Row="1" />
 
         <Label Content="本文:" Margin="5" FontSize="35" Grid.Row="4" />
-        <TextBox x:Name="Body" FontSize="35" Margin="5" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"/>
+        <TextBox x:Name="tbBody" FontSize="35" Margin="5" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3"/>
 
         <Label Content="添付ファイル:" Margin="5" FontSize="35" Grid.Column="2" />
         <ListBox x:Name="lbfile" FontSize="35" Margin="5" Grid.Column="3" Grid.RowSpan="4"/>

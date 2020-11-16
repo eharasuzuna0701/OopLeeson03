@@ -100,6 +100,5 @@ namespace SendMailApp {
 			tbAddress.Text = (Config.GetInstance()).MailAddress;
 		}
 
-		
 	}
 }
