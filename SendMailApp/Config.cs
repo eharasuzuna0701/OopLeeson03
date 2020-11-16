@@ -45,12 +45,13 @@ namespace SendMailApp {
 			return obj;
 		}
 
+		//設定データを更新
 		public bool Updatestatus(string smtp, string mailAddress, string passWord, int port, bool ssl) {
-			this.Smtp = "smtp.gmail.com";
-			this.MailAddress = "ojsinfosys01@gmail.com";
-			this.PassWord = "ojsInfosys2020";
-			this.Port = 587;
-			this.Ssl = true;
+			this.Smtp = smtp;
+			this.MailAddress = mailAddress;
+			this.PassWord = passWord;
+			this.Port = port;
+			this.Ssl = ssl;
 			return true;
 		}
 

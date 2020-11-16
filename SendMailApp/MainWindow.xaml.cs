@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -48,6 +49,11 @@ namespace SendMailApp {
 				msg.Subject = Subject.Text;
 				msg.Body = Body.Text;
 
+				//添付ファイル
+				foreach (var item in lbfile.Items) {
+					msg.Attachments.Add(new Attachment(item.ToString()));
+					
+				}
 
 				sc.Host = ctf.Smtp;
 				sc.Port = ctf.Port;
@@ -96,6 +102,18 @@ namespace SendMailApp {
 			}
 			
 		}
+		//添付ファイル追加
+		private void btAdd_Click(object sender, RoutedEventArgs e) {
+			var ofd = new OpenFileDialog();
 
+			if (ofd.ShowDialog() == true) {
+				lbfile.Items.Add(ofd.FileNames);
+			}
+		}
+		//添付ファイル削除
+		private void btcDel_Click(object sender, RoutedEventArgs e) {
+			lbfile.Items.Remove(lbfile.SelectedItem);
+		}
 	}
+	
 }
